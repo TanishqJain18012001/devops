@@ -1,10 +1,10 @@
-name: Select and Pull Docker Image
+name: Select, Pull, and Run Docker Image
 
 on:
   workflow_dispatch:
     inputs:
       docker_image:
-        description: 'Select a Docker image to pull'
+        description: 'Select a Docker image to pull and run'
         required: true
         default: 'Select'
         options:
@@ -15,8 +15,11 @@ on:
           - 'fedora:latest'
 
 jobs:
-  select_and_pull_docker_image:
+  select_pull_and_run_docker_image:
     runs-on: ubuntu-latest
     steps:
       - name: Pull Docker Image
         run: docker pull ${{ github.event.inputs.docker_image }}
+
+      - name: Run Docker Image
+        run: docker run -d ${{ github.event.inputs.docker_image }}
