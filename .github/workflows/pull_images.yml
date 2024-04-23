@@ -8,11 +8,11 @@ on:
         required: true
         default: 'Select'
         options:
-          - 'ubuntu:latest'
-          - 'centos:latest'
-          - 'alpine:latest'
-          - 'debian:latest'
-          - 'fedora:latest'
+          - 'ubuntu'
+          - 'centos'
+          - 'alpine'
+          - 'debian'
+          - 'fedora'
 
 jobs:
   select_pull_and_run_docker_image:
@@ -22,4 +22,4 @@ jobs:
         run: docker pull ${{ github.event.inputs.docker_image }}
 
       - name: Run Docker Image
-        run: docker run -d ${{ github.event.inputs.docker_image }}
+        run: docker run -d ${{ github.event.inputs.docker_image }}:latest
