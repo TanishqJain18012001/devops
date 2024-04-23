@@ -2,27 +2,21 @@ name: Select and Pull Docker Image
 
 on:
   workflow_dispatch:
+    inputs:
+      docker_image:
+        description: 'Select a Docker image to pull'
+        required: true
+        default: 'Select'
+        options:
+          - 'ubuntu:latest'
+          - 'centos:latest'
+          - 'alpine:latest'
+          - 'debian:latest'
+          - 'fedora:latest'
 
 jobs:
   select_and_pull_docker_image:
     runs-on: ubuntu-latest
     steps:
-      - name: Select Docker Image
-        id: select_image
-        run: |
-          echo "::set-output name=image::$(echo -e "1. Ubuntu\n2. CentOS\n3. Alpine\n4. Debian\n5. Fedora" | fzf)"
-      
-      - name: Set Docker Image
-        run: |
-          selected_image=${{ steps.select_image.outputs.image }}
-          case $selected_image in
-            "1. Ubuntu") docker_image="ubuntu:latest";;
-            "2. CentOS") docker_image="centos:latest";;
-            "3. Alpine") docker_image="alpine:latest";;
-            "4. Debian") docker_image="debian:latest";;
-            "5. Fedora") docker_image="fedora:latest";;
-          esac
-          echo "Selected Docker Image: $docker_image"
-
       - name: Pull Docker Image
-        run: docker pull $docker_image
+        run: docker pull ${{ github.event.inputs.docker_image }}
