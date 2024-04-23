@@ -1,1 +1,26 @@
+name: Pull Docker Images
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  pull_images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull Docker Image 1
+        run: docker pull nginx:latest
+      
+      - name: Pull Docker Image 2
+        run: docker pull redis:latest
+      
+      - name: Pull Docker Image 3
+        run: docker pull postgres:latest
+      
+      - name: Pull Docker Image 4
+        run: docker pull ubuntu:latest
+      
+      - name: Pull Docker Image 5
+        run: docker pull node:latest
 
