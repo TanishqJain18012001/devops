@@ -6,13 +6,7 @@ on:
       docker_image:
         description: 'Select a Docker image to pull and run'
         required: true
-        default: 'Select'
-        options:
-          - 'ubuntu'
-          - 'centos'
-          - 'alpine'
-          - 'debian'
-          - 'fedora'
+        default: 'ubuntu,centos,alpine,debian,fedora'
 
 jobs:
   select_pull_and_run_docker_image:
